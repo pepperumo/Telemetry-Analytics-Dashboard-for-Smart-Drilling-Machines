@@ -95,14 +95,6 @@ If any command shows an error, the software isn't installed correctly.
 
 A comprehensive web-based dashboard for analyzing telemetry data from smart devices ("Pods") retrofitted into drilling machines. The dashboard provides insights into drilling operations, battery status, GPS tracking, and Smart Tag detection for July 2025 drilling sessions in the Berlin area.
 
-## � Quick Start
-
-### Prerequisites
-- **Python 3.8+** (for backend)
-- **Node.js 18+** (for frontend)
-
-## 🚀 Quick Start
-
 ### Method A: Using Git (Recommended)
 
 1. **Clone the repository:**
