@@ -1,33 +1,148 @@
 # Telemetry Analytics Dashboard for Smart Drilling Machines
 
+![Python](https://img.shields.io/badge/python-v3.11+-blue.svg)
+![Node](https://img.shields.io/badge/node-v18+-green.svg)
+![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+
+This project is developed for educational and demonstration purposes.
+
+
+## 🏆 Acknowledgments
+
+- Built with [FastAPI](https://fastapi.tiangolo.com/) and [React](https://reactjs.org/)
+- Maps powered by [OpenStreetMap](https://www.openstreetmap.org/) 
+---
+
+**Note:** This dashboard processes simulated telemetry data for July 2025 drilling sessions in the Berlin area. The data includes realistic patterns for demonstration of analytics capabilities.
+
+A comprehensive web-based dashboard for analyzing telemetry data from smart devices ("Pods") retrofitted into drilling machines. The dashboard provides insights into drilling operations, battery status, GPS tracking, and Smart Tag detection for July 2025 drilling sessions in the Berlin area.
+
+## 📋 System Requirements
+
+### Required
+- **Python 3.11+**: For the backend server
+- **Node.js 18+**: For the frontend application
+
+### Optional (Recommended)
+- **Git**: For easy updates and contributing (alternative: download ZIP)
+
+## 🛠️ Installation Guide
+
+**First-time users:** Install the requirements below, then come back to the Quick Start section.
+
+### Windows
+1. **Python 3.11+**: Download from [python.org](https://python.org/downloads/)
+   - ✅ **Important**: Check "Add Python to PATH" during installation
+   - 🔄 **Restart your terminal** after installation
+2. **Node.js 18+**: Download LTS from [nodejs.org](https://nodejs.org/en/download)
+   - Use the Windows Installer (.msi)
+   - 🔄 **Restart your terminal** after installation
+3. **Git** (Optional): Download from [git-scm.com](https://git-scm.com/)
+
+### macOS
+**Option A (Recommended):**
+```bash
+# Install Homebrew first (if not already installed)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Install requirements
+brew install python@3.11 node git
+```
+
+**Option B:**
+1. **Python**: Download from [python.org](https://python.org/downloads/macos/)
+2. **Node.js**: Download from [nodejs.org](https://nodejs.org/)
+3. **Git**: Pre-installed or download from [git-scm.com](https://git-scm.com/)
+
+### Linux (Ubuntu/Debian)
+```bash
+sudo apt update
+sudo apt install python3 python3-pip python3-venv git
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt install nodejs
+```
+
+## ✅ Verify Installation
+
+**After installing the requirements above, verify everything works:**
+
+**Windows (PowerShell):**
+```powershell
+python --version; node --version
+```
+
+**macOS/Linux:**
+```bash
+python3 --version && node --version
+```
+
+**Optional:**
+```bash
+git --version
+```
+
+**Expected output example:**
+```
+Python 3.11.x
+v18.x.x
+git version 2.x.x
+```
+
+If any command shows an error, the software isn't installed correctly.
+
+## 🚀 Quick Start: try Analytics Dashboard for Smart Drilling Machines
+
 A comprehensive web-based dashboard for analyzing telemetry data from smart devices ("Pods") retrofitted into drilling machines. The dashboard provides insights into drilling operations, battery status, GPS tracking, and Smart Tag detection for July 2025 drilling sessions in the Berlin area.
 
 ## � Quick Start
 
 ### Prerequisites
-- **Python 3.11+** (for backend)
+- **Python 3.8+** (for backend)
 - **Node.js 18+** (for frontend)
 
-### Option 1: Using Startup Scripts
-**Windows:**
-```bash
-./start-backend.bat
-```
+## 🚀 Quick Start
 
-**Linux/Mac:**
-```bash
-./start-backend.sh
-```
+### Method A: Using Git (Recommended)
 
-**Start Frontend:**
-```bash
-cd frontend
-npm install
-npm run dev
-```
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/pepperumo/Telemetry-Analytics-Dashboard-for-Smart-Drilling-Machines.git
+   cd Telemetry-Analytics-Dashboard-for-Smart-Drilling-Machines
+   ```
 
-**Open Dashboard:**
-Navigate to `http://localhost:5173`
+### Method B: Download ZIP (No Git Required)
+
+1. **Download ZIP file:**
+   - Go to [GitHub repository](https://github.com/pepperumo/Telemetry-Analytics-Dashboard-for-Smart-Drilling-Machines)
+   - Click "Code" → "Download ZIP"
+   - Extract to your desired location
+   - Open terminal/command prompt in the extracted folder
+
+### Continue Setup (Both Methods)
+
+2. **Start Backend:**
+   **Windows:**
+   ```bash
+   ./start-backend.bat
+   ```
+
+   **macOS/Linux:**
+   ```bash
+   ./start-backend.sh
+   ```
+
+3. **Start Frontend** (new terminal):
+   ```bash
+   cd frontend
+   npm install
+   npm run dev
+   ```
+
+4. **Open Dashboard:**
+   - Backend API: http://localhost:8000
+   - Frontend: http://localhost:5173
+   - API Documentation: http://localhost:8000/docs
 
 ### Option 2: Manual Setup
 
@@ -38,8 +153,12 @@ cd backend
 
 # Create and activate virtual environment
 python -m venv venv
-venv\Scripts\activate  # Windows
-# source venv/bin/activate  # Linux/Mac
+
+# Windows
+venv\Scripts\activate
+
+# macOS/Linux
+# source venv/bin/activate
 
 # Install dependencies
 pip install -r requirements.txt
@@ -60,7 +179,50 @@ npm install
 npm run dev
 ```
 
-The backend will run at `http://localhost:8000` and the frontend at `http://localhost:5173`.
+**Access Points:**
+- Backend: `http://localhost:8000`
+- Frontend: `http://localhost:5173`
+- API Documentation: `http://localhost:8000/docs`
+
+## 🔧 Troubleshooting
+
+### Common Issues
+
+**❌ "git is not recognized" or don't have Git**
+- **Solution 1**: Download project as ZIP file (see Method B above)
+- **Solution 2**: Install Git from [git-scm.com](https://git-scm.com/) for future convenience
+
+**❌ "python is not recognized"**
+- **Windows**: Reinstall Python with "Add to PATH" checked
+- **macOS/Linux**: Use `python3` instead of `python`
+
+**❌ "npm command not found"**
+- Install Node.js from [nodejs.org](https://nodejs.org/)
+- Restart your terminal after installation
+
+**❌ "Permission denied" errors**
+- **Windows**: Run terminal as Administrator
+- **macOS/Linux**: Use `sudo` for system-wide installations
+
+**❌ Port already in use**
+```bash
+# Kill processes on ports 8000 and 5173
+# Windows
+netstat -ano | findstr :8000
+taskkill /PID <PID> /F
+
+# macOS/Linux  
+lsof -ti:8000 | xargs kill
+```
+
+**❌ Virtual environment issues**
+```bash
+# Delete and recreate venv
+rm -rf venv  # (macOS/Linux) or rmdir /s venv (Windows)
+python -m venv venv
+```
+
+**Need help?** [Open an issue](https://github.com/pepperumo/Telemetry-Analytics-Dashboard-for-Smart-Drilling-Machines/issues)
 
 ## 📊 Features
 
@@ -181,37 +343,7 @@ The application works directly with:
 - **React Leaflet** for mapping
 - **Vite** for build tooling
 
-## 🔍 Troubleshooting
 
-### Common Issues
-
-**Backend not loading data:**
-- Ensure `raw_drilling_sessions.csv` is in `public/data/` directory
-- Check file permissions and paths in `data_processor.py`
-- Verify Python dependencies: `pip install -r requirements.txt`
-
-**Frontend connection errors:**
-- Confirm backend is running on port 8000 (`python main.py`)
-- Check CORS configuration in `main.py`
-- Verify API endpoints in `frontend/src/services/api.ts`
-
-**Map not displaying:**
-- Ensure internet connection for tile loading
-- Check leaflet CSS imports in React components
-- Verify GPS coordinates are valid in data
-
-**Development servers:**
-- Backend: `http://localhost:8000` 
-- Frontend: `http://localhost:5173`
-- API docs: `http://localhost:8000/docs` (FastAPI auto-generated)
-
-## � Data Processing Details
-
-For detailed technical documentation on data processing, see the Jupyter notebook:
-- **Location**: `public/notebooks/raw_data_analysis.ipynb`
-- **Content**: Complete data processing pipeline with feature engineering
-- **Sections**: Ingestion, validation, geospatial processing, session segmentation, and export
-- **Note**: The notebook shows advanced processing (distance, speed, bearing) for analysis purposes, while the dashboard uses simplified real-time processing
 
 ## �📄 License
 
