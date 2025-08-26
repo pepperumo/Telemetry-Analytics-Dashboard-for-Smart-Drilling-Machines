@@ -376,6 +376,72 @@ class DataProcessor:
         
         return sorted(timeline, key=lambda x: x['start'])
     
+    def get_drilling_sessions(self, device_id: Optional[str] = None, limit: int = 50) -> List[Dict]:
+        """Get drilling session data for MCP tools"""
+        if self.raw_df is None:
+            return []
+        
+        # Compute sessions on-the-fly
+        telemetry_df, sessions_df = self._compute_sessions()
+        
+        # Filter by device if specified
+        if device_id:
+            sessions_df = sessions_df[sessions_df['device_id'] == device_id]
+        
+        # Convert to list of dictionaries
+        sessions = []
+        for _, session in sessions_df.head(limit).iterrows():
+            sessions.append({
+                "session_id": session['session_id'],
+                "device_id": session['device_id'],
+                "start_time": session['start'],
+                "end_time": session['end'],
+                "duration_minutes": session['duration_min'],
+                "tagged": session['tagged'],
+                "total_depth": 0.0,  # Placeholder - could be calculated from actual data
+                "average_speed": 0.0,  # Placeholder - could be calculated from actual data
+                "efficiency_score": 0.85  # Placeholder - could be calculated from actual data
+            })
+        
+        return sessions
+    
+    def get_performance_metrics(self, device_id: Optional[str] = None, metric_type: Optional[str] = None) -> Dict[str, Any]:
+        """Get performance metrics for MCP tools"""
+        if self.raw_df is None:
+            return {
+                "device_id": device_id or "all",
+                "efficiency": 0.0,
+                "average_speed": 0.0,
+                "uptime_percentage": 0.0,
+                "maintenance_score": 0.0,
+                "calculated_at": datetime.now().isoformat()
+            }
+        
+        # Filter by device if specified
+        df = self.raw_df
+        if device_id:
+            df = df[df['device_id'] == device_id]
+        
+        # Calculate basic metrics from real data
+        total_records = len(df)
+        operational_records = len(df[df['current_amp'] > 0.1])  # Assume operational when current > 0.1A
+        uptime_percentage = (operational_records / total_records * 100) if total_records > 0 else 0
+        
+        avg_current = df['current_amp'].mean() if not df.empty else 0
+        avg_battery = df['battery_level'].mean() if not df.empty else 0
+        
+        return {
+            "device_id": device_id or "all",
+            "efficiency": min(uptime_percentage / 100 * 1.2, 1.0),  # Scaled efficiency
+            "average_speed": avg_current * 10,  # Approximated speed from current
+            "uptime_percentage": uptime_percentage,
+            "maintenance_score": min(avg_battery / 100 * 1.2, 1.0),  # Battery-based maintenance score
+            "average_current": avg_current,
+            "average_battery": avg_battery,
+            "total_records": total_records,
+            "calculated_at": datetime.now().isoformat()
+        }
+
     def get_battery_trends(self, start_date: Optional[str] = None, 
                          end_date: Optional[str] = None) -> List[Dict]:
         """Get battery level trends over time"""
