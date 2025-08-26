@@ -96,3 +96,6 @@ export interface SessionData {
 }
 
 export type OperatingState = 'OFF' | 'STANDBY' | 'SPIN' | 'DRILL';
+
+// Export ML types
+export * from './ml';

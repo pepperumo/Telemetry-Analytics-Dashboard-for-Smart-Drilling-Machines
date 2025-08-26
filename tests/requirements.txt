@@ -1,0 +1,12 @@
+# Test dependencies for ML integration tests
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+httpx>=0.24.0
+selenium>=4.11.0  # For frontend testing (optional)
+
+# Coverage reporting
+pytest-cov>=4.1.0
+
+# Test utilities
+pytest-mock>=3.11.0
+pytest-xdist>=3.3.0  # For parallel test execution

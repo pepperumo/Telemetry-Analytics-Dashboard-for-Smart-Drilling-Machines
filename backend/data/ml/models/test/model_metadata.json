@@ -1,0 +1,51 @@
+{
+  "model_version": "1.0.0",
+  "training_date": "2025-08-26T14:56:28.375921",
+  "feature_count": 24,
+  "training_samples": 3,
+  "cross_val_score": -0.0003564152332773407,
+  "r2_score": -0.0003564152332773407,
+  "rmse": 0.08705511749715461,
+  "feature_importance_top_10": [
+    {
+      "feature": "current_mean",
+      "importance": 0.0
+    },
+    {
+      "feature": "current_std",
+      "importance": 0.0
+    },
+    {
+      "feature": "current_max",
+      "importance": 0.0
+    },
+    {
+      "feature": "voltage_mean",
+      "importance": 0.0
+    },
+    {
+      "feature": "voltage_std",
+      "importance": 0.0
+    },
+    {
+      "feature": "power_mean",
+      "importance": 0.0
+    },
+    {
+      "feature": "power_max",
+      "importance": 0.0
+    },
+    {
+      "feature": "temperature_mean",
+      "importance": 0.0
+    },
+    {
+      "feature": "temperature_max",
+      "importance": 0.0
+    },
+    {
+      "feature": "vibration_mean",
+      "importance": 0.0
+    }
+  ]
+}

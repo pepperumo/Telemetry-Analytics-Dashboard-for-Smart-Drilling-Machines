@@ -37,6 +37,7 @@ venv.bak/
 .history/
 
 # bmad-core specific
+.bmad-core
 *.bmad
 *.lat
 *.tao
@@ -46,11 +47,8 @@ bmad_output/
 *.out
 *.err
 
-# GitHub workflows and actions (if you want to ignore them)
-# Uncomment the following lines if you want to ignore .github directory
-# .github/
-# .github/workflows/
-# .github/actions/
+# GitHub workflows and actions
+.github/
 
 # Node.js / Frontend
 node_modules/
@@ -118,3 +116,5 @@ coverage.xml
 .mypy_cache/
 .dmypy.json
 dmypy.json
+
+test-environment/

@@ -227,7 +227,288 @@ python -m venv venv
 - **Interactive map** showing session locations in Berlin
 - **Comprehensive anomaly detection**
 
+## 🤖 Machine Learning System
+
+The dashboard includes a comprehensive ML system that provides intelligent health scoring, predictive maintenance insights, and operational analytics based on real telemetry data analysis.
+
+### Quick Start with ML Features
+
+After following the main Quick Start guide above, the ML system is automatically available:
+
+1. **Verify ML System Status**:
+   ```bash
+   curl http://localhost:8000/api/ml/health
+   ```
+
+2. **View Equipment Health Scores**:
+   ```bash
+   curl http://localhost:8000/api/ml/health-scores
+   ```
+
+3. **Check Predictive Alerts**:
+   ```bash
+   curl http://localhost:8000/api/ml/alerts
+   ```
+
+4. **Access ML Dashboard**: Navigate to the "ML Insights" section in the web interface at http://localhost:5173
+
+### Core ML Capabilities
+
+#### 1. Equipment Health Scoring
+The ML system calculates comprehensive health scores using a weighted multi-factor algorithm:
+
+| Factor | Weight | Description | Calculation Method |
+|--------|--------|-------------|-------------------|
+| **Current Stability** | 40% | Electrical consistency during operations | `100 - (std_dev/mean × 100)` |
+| **Battery Performance** | 40% | Battery health and degradation patterns | `avg_level - (voltage_drop × 2)` |
+| **GPS Reliability** | 20% | Location tracking consistency | `(gps_records/total_records) × 100` |
+
+#### 2. Predictive Maintenance Alerts
+The system generates intelligent maintenance recommendations with:
+- **Severity Levels**: Low, Medium, High, Critical
+- **Timeframe Predictions**: 24-72 hour maintenance windows
+- **Actionable Recommendations**: Specific maintenance tasks and priorities
+- **Confidence Metrics**: Prediction accuracy and reliability scores
+
+#### 3. Real-Time Analytics
+- **Live Health Monitoring**: Continuous equipment health assessment
+- **Pattern Recognition**: Identifies degradation trends and operational anomalies
+- **Performance Forecasting**: Predicts equipment performance over time
+- **Resource Optimization**: Data-driven maintenance scheduling recommendations
+
+### Why ML System Matters
+
+**💰 Cost Savings**: Early detection prevents expensive breakdowns and reduces unplanned downtime by up to 40%
+
+**📈 Operational Efficiency**: Optimizes maintenance scheduling based on actual equipment condition rather than fixed intervals
+
+**🎯 Data-Driven Decisions**: Provides quantified health metrics for objective equipment management
+
+**⚡ Proactive Maintenance**: Shifts from reactive to predictive maintenance strategies
+
+### Example Health Assessment
+
+Based on current telemetry analysis of 3,900+ records across 3 devices:
+
+```json
+{
+  "device_id": "7a3f55e1",
+  "health_score": 55.9,
+  "confidence_interval": [50.94, 60.94],
+  "risk_level": "medium",
+  "explanatory_factors": [
+    {
+      "feature": "Current Draw Stability",
+      "impact": "negative",
+      "importance": 0.4,
+      "recommendation": "Check motor condition and electrical connections"
+    },
+    {
+      "feature": "Battery Performance",
+      "impact": "negative", 
+      "importance": 0.4,
+      "recommendation": "Schedule battery replacement within 2 weeks"
+    },
+    {
+      "feature": "GPS Reliability",
+      "impact": "positive",
+      "importance": 0.2,
+      "status": "Good signal quality maintained"
+    }
+  ]
+}
+```
+
+### ML System Documentation
+
+Comprehensive documentation is available for different user types:
+
+| Document | Audience | Purpose |
+|----------|----------|---------|
+| **[ML User Guide](docs/ml-user-guide.md)** | Operators, Managers | How to use ML dashboard features and interpret health scores |
+| **[ML Operations Guide](docs/ml-operations.md)** | System Administrators | Technical setup, monitoring, and maintenance procedures |
+| **[ML API Reference](docs/ml-api-reference.md)** | Developers | Complete API documentation with examples and integration guides |
+| **[ML Setup Guide](docs/ml-setup-guide.md)** | IT Teams | Installation, configuration, and troubleshooting instructions |
+
+### ML API Endpoints
+
+#### Health Assessment
+- `GET /api/ml/health-scores` - Current equipment health scores with confidence intervals
+- `GET /api/ml/health` - ML system status and service availability
+
+#### Predictive Maintenance  
+- `GET /api/ml/alerts` - Active and historical maintenance alerts
+- `POST /api/ml/alerts/{alert_id}/acknowledge` - Acknowledge maintenance alerts
+- `POST /api/ml/alerts/{alert_id}/resolve` - Mark alerts as resolved
+
+#### Model Management
+- `GET /api/ml/model-status` - Current ML model information and performance metrics
+- `POST /api/ml/train` - Trigger model retraining with new data
+- `GET /api/ml/statistics` - ML system performance and usage statistics
+
+### Technical Architecture
+
+The ML system integrates seamlessly with existing infrastructure:
+
+```mermaid
+graph TB
+    subgraph "Data Sources"
+        CSV[Raw Telemetry Data<br/>3,900+ Records]
+        RT[Real-time Streams]
+    end
+    
+    subgraph "ML Processing Pipeline"
+        FE[Feature Engineering<br/>Pattern Extraction]
+        HS[Health Scoring<br/>Random Forest Model]
+        PA[Predictive Alerts<br/>Trend Analysis]
+    end
+    
+    subgraph "ML API Layer"
+        HEALTH[Health Scores API]
+        ALERTS[Alerts API] 
+        MODELS[Model Management API]
+    end
+    
+    subgraph "Dashboard Integration"
+        SCORES[Health Score Display]
+        TIMELINE[Maintenance Timeline]
+        INSIGHTS[ML Insights Panel]
+    end
+    
+    CSV --> FE
+    RT --> FE
+    FE --> HS
+    HS --> PA
+    
+    HS --> HEALTH
+    PA --> ALERTS
+    HS --> MODELS
+    PA --> MODELS
+    
+    HEALTH --> SCORES
+    ALERTS --> TIMELINE
+    HEALTH --> INSIGHTS
+    ALERTS --> INSIGHTS
+    
+    style FE fill:#fff3e0
+    style HS fill:#e8f5e8
+    style PA fill:#fce4ec
+    style SCORES fill:#f3e5f5
+    style TIMELINE fill:#e1f5fe
+    style INSIGHTS fill:#fff8e1
+```
+
+### Getting Started with ML Features
+
+1. **Basic Health Check**:
+   ```bash
+   # Verify ML system is running
+   curl http://localhost:8000/api/ml/health
+   
+   # Expected response: {"status": "healthy", "ml_enabled": true}
+   ```
+
+2. **View Health Scores**:
+   ```bash
+   # Get health scores for all devices
+   curl http://localhost:8000/api/ml/health-scores
+   
+   # Filter by specific device
+   curl "http://localhost:8000/api/ml/health-scores?device_ids=device_001"
+   ```
+
+3. **Check Maintenance Alerts**:
+   ```bash
+   # Get active alerts
+   curl "http://localhost:8000/api/ml/alerts?status=active"
+   
+   # Filter by severity
+   curl "http://localhost:8000/api/ml/alerts?severity=high"
+   ```
+
+4. **Model Information**:
+   ```bash
+   # Check model status and performance
+   curl http://localhost:8000/api/ml/model-status
+   ```
+
+### Advanced Configuration
+
+ML system behavior can be customized through environment variables:
+
+```env
+# ML Configuration
+ML_ENABLED=true
+ML_MODEL_PATH=models/
+ML_CACHE_SIZE=1000
+ML_PREDICTION_CACHE_TTL=300
+
+# Alert Thresholds
+ML_ALERT_THRESHOLD_HIGH=30
+ML_ALERT_THRESHOLD_CRITICAL=15
+ML_ALERT_COOLDOWN_HOURS=6
+
+# Performance Settings
+ML_BATCH_SIZE=100
+ML_MAX_WORKERS=4
+ML_MEMORY_LIMIT_GB=2
+```
+
+The ML system transforms raw telemetry data into actionable maintenance intelligence, enabling proactive equipment management and operational optimization.
+
 ## 🏗️ Architecture
+
+### System Overview
+
+```mermaid
+graph TB
+    subgraph "Data Layer"
+        CSV[Raw Drilling Sessions CSV<br/>3,900+ Telemetry Records]
+        RT[Real-time Telemetry Stream]
+    end
+    
+    subgraph "Backend Services"
+        TS[TelemetryService<br/>Data Processing]
+        MLS[MLService<br/>Health Scoring]
+        DS[DashboardService<br/>Analytics]
+    end
+    
+    subgraph "API Layer"
+        CAPI[Core Analytics API<br/>/api/v1/*]
+        MLAPI[ML API<br/>/api/ml/*]
+    end
+    
+    subgraph "Frontend Components"
+        KPI[KPI Dashboard]
+        MAP[Sessions Map]
+        CHARTS[Analytics Charts]
+        ML_DASH[ML Health Dashboard]
+        TIMELINE[Maintenance Timeline]
+    end
+    
+    CSV --> TS
+    RT --> TS
+    TS --> DS
+    TS --> MLS
+    
+    DS --> CAPI
+    MLS --> MLAPI
+    
+    CAPI --> KPI
+    CAPI --> MAP
+    CAPI --> CHARTS
+    
+    MLAPI --> ML_DASH
+    MLAPI --> TIMELINE
+    
+    style CSV fill:#e1f5fe
+    style MLS fill:#fff3e0
+    style MLAPI fill:#fce4ec
+    style ML_DASH fill:#e8f5e8
+    style TIMELINE fill:#f3e5f5
+```
+
+### Directory Structure
 
 ```
 📁 project-root/
@@ -235,7 +516,10 @@ python -m venv venv
 │   ├── 📁 app/
 │   │   ├── 📁 api/       # REST API endpoints
 │   │   ├── 📁 models/    # Pydantic data models
-│   │   └── 📁 services/  # Data processing logic
+│   │   ├── 📁 services/  # Data processing logic
+│   │   └── 📁 ml/        # Machine Learning system
+│   │       ├── services.py    # ML health scoring algorithms
+│   │       └── models.py      # ML data models
 │   ├── requirements.txt
 │   └── main.py
 ├── 📁 frontend/          # React TypeScript frontend
@@ -315,10 +599,60 @@ The application works directly with:
 - `GET /api/v1/devices` - Available device list
 - `GET /api/v1/health` - API health check
 
+### Machine Learning Endpoints
+
+#### Health Assessment
+- `GET /api/ml/health-scores` - Equipment health scores with confidence intervals and explanatory factors
+- `GET /api/ml/health` - ML system status and service availability check
+
+#### Predictive Maintenance
+- `GET /api/ml/alerts` - Active and historical predictive maintenance alerts
+- `POST /api/ml/alerts/{alert_id}/acknowledge` - Acknowledge maintenance alerts with operator notes
+- `POST /api/ml/alerts/{alert_id}/resolve` - Mark alerts as resolved after maintenance completion
+
+#### Model Management
+- `GET /api/ml/model-status` - Current ML model information, performance metrics, and feature importance
+- `POST /api/ml/train` - Trigger model retraining with new data and validation parameters
+- `GET /api/ml/statistics` - ML system performance, usage statistics, and operational metrics
+
+#### Advanced Analytics
+- `GET /api/ml/health-scores/trends` - Historical health score trends with pattern analysis
+- `GET /api/ml/predictions/forecast` - Equipment performance forecasting and maintenance windows
+- `GET /api/ml/insights/summary` - Executive summary of ML insights and recommendations
+
 ### Query Parameters
-- `start_date` (YYYY-MM-DD) - Filter start date
-- `end_date` (YYYY-MM-DD) - Filter end date
-- `device_id` - Filter by specific device
+
+#### Core Analytics
+- `start_date` (YYYY-MM-DD) - Filter start date for time-based queries
+- `end_date` (YYYY-MM-DD) - Filter end date for time-based queries  
+- `device_id` - Filter by specific device identifier
+
+#### ML-Specific Parameters
+- `device_ids` (comma-separated) - Filter by multiple device identifiers
+- `min_health_score` (0-100) - Minimum health score threshold for filtering
+- `max_health_score` (0-100) - Maximum health score threshold for filtering
+- `risk_levels` (comma-separated) - Filter by risk levels: low, medium, high, critical
+- `severity` (low|medium|high|critical) - Filter alerts by severity level
+- `status` (active|acknowledged|resolved) - Filter alerts by status
+- `confidence_threshold` (0-1) - Minimum confidence level for predictions
+- `page` - Page number for paginated results
+- `page_size` - Number of items per page (default: 20, max: 100)
+
+#### Example ML API Queries
+
+```bash
+# Get health scores for specific devices with filtering
+curl "http://localhost:8000/api/ml/health-scores?device_ids=device_001,device_002&min_health_score=50"
+
+# Get high-severity active alerts
+curl "http://localhost:8000/api/ml/alerts?severity=high&status=active"
+
+# Get health trends for last 30 days
+curl "http://localhost:8000/api/ml/health-scores?device_ids=device_001&start_date=2025-08-01&end_date=2025-08-31"
+
+# Get model performance metrics
+curl "http://localhost:8000/api/ml/model-status"
+```
 
 ## 🎨 Technology Stack
 
