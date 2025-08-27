@@ -29,16 +29,21 @@ const getMLApiBaseUrl = () => {
     return 'http://localhost:8000/api/ml';
   }
   
-  // For GitHub Pages or external access, you need to provide your machine's IP
-  // Replace 'YOUR_MACHINE_IP' with the actual IP address of the computer running the backend
+  // For GitHub Pages or external access, use HTTPS to avoid Mixed Content issues
   const BACKEND_IP = import.meta.env.VITE_BACKEND_IP || 'localhost';
-  const mlApiUrl = `http://${BACKEND_IP}:8000/api/ml`;
+  
+  // Force HTTPS for GitHub Pages to avoid Mixed Content issues
+  const protocol = 'https';  // Always use HTTPS for external access
+  const mlApiUrl = `${protocol}://${BACKEND_IP}:8000/api/ml`;
   
   // Debug logging
   console.log('ML API Environment Debug:');
   console.log('- Current hostname:', window.location.hostname);
   console.log('- VITE_BACKEND_IP:', import.meta.env.VITE_BACKEND_IP);
+  console.log('- VITE_USE_HTTPS:', import.meta.env.VITE_USE_HTTPS);
+  console.log('- Raw env object:', import.meta.env);
   console.log('- Resolved BACKEND_IP:', BACKEND_IP);
+  console.log('- Using protocol:', protocol);
   console.log('- Final ML API URL:', mlApiUrl);
   
   return mlApiUrl;
