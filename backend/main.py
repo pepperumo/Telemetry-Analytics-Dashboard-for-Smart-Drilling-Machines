@@ -130,9 +130,16 @@ async def health():
     return health_status
 
 if __name__ == "__main__":
+    import ssl
+    
+    # Create SSL context for HTTPS
+    ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+    ssl_context.load_cert_chain("cert.pem", "key.pem")
+    
     uvicorn.run(
         app, 
         host=API_HOST, 
         port=API_PORT,
+        ssl=ssl_context,
         reload=os.getenv("API_RELOAD", "false").lower() == "true"
     )
