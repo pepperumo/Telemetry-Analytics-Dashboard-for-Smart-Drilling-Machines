@@ -1,0 +1,14 @@
+{
+  "name": "Build and Deploy to GitHub Pages with Local Backend",
+  "scripts": {
+    "build:github-pages": "cross-env VITE_API_BASE_URL=http://192.168.0.53:8000 vite build --config vite.config.prod.ts",
+    "build:github-pages:ngrok": "cross-env VITE_API_BASE_URL=https://YOUR_NGROK_URL.ngrok.io vite build --config vite.config.prod.ts",
+    "preview:github-pages": "vite preview --config vite.config.prod.ts"
+  },
+  "instructions": {
+    "step1": "Your IP address is already configured: 192.168.0.53",
+    "step2": "Or use ngrok for secure tunneling and replace YOUR_NGROK_URL",
+    "step3": "Run 'npm run build:github-pages' or 'npm run build:github-pages:ngrok'",
+    "step4": "The built files will be in 'dist/' folder ready for GitHub Pages"
+  }
+}

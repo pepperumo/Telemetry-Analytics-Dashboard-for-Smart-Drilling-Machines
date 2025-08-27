@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:github-pages": "tsc -b && vite build --base=/Telemetry-Analytics-Dashboard-for-Smart-Drilling-Machines/",
     "lint": "eslint .",
     "preview": "vite preview"
   },
