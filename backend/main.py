@@ -20,7 +20,7 @@ ML_DEBUG = os.getenv("ML_DEBUG", "false").lower() == "true"
 API_HOST = os.getenv("API_HOST", "0.0.0.0")
 API_PORT = int(os.getenv("API_PORT", "8000"))
 DEBUG = os.getenv("DEBUG", "false").lower() == "true"
-CORS_ORIGINS = os.getenv("CORS_ORIGINS", "http://localhost:3000,http://localhost:5173,http://localhost:5174,https://pepperumo.github.io").split(",")
+CORS_ORIGINS = os.getenv("CORS_ORIGINS", "http://localhost:3000,http://localhost:5173,http://localhost:5174").split(",")
 MCP_ENABLED = os.getenv("MCP_ENABLED", "true").lower() == "true"
 
 # Initialize data processor

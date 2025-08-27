@@ -8,9 +8,7 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
-  },
-  define: {
-    // Define environment variables for production
-    __PROD_API_BASE_URL__: JSON.stringify(process.env.VITE_API_BASE_URL || 'http://localhost:8000'),
+    sourcemap: false,
+    minify: 'terser',
   },
 })

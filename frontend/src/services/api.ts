@@ -6,20 +6,7 @@ import type {
   SessionData,
 } from '../types';
 
-// Environment-based API URL configuration
-const getApiBaseUrl = () => {
-  // Check if we're in production (GitHub Pages)
-  if (import.meta.env.PROD) {
-    // For GitHub Pages deployment with local backend
-    // Replace 'YOUR_LOCAL_IP' with your actual local IP address
-    // Example: 'http://192.168.1.100:8000' or use ngrok URL
-    return import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
-  }
-  // Development mode
-  return 'http://localhost:8000';
-};
-
-const API_BASE_URL = `${getApiBaseUrl()}/api/v1`;
+const API_BASE_URL = 'http://localhost:8000/api/v1';
 
 class ApiService {
   private async fetchJson<T>(url: string): Promise<T> {
