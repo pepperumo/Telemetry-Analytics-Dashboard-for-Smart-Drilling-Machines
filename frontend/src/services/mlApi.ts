@@ -22,34 +22,7 @@ import type {
   MLErrorResponse,
 } from '../types/ml';
 
-// Determine API base URL based on environment
-const getMLApiBaseUrl = () => {
-  // If running in development (localhost), use localhost
-  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-    return 'http://localhost:8000/api/ml';
-  }
-  
-  // For GitHub Pages or external access, use HTTPS to avoid Mixed Content issues
-  const BACKEND_IP = import.meta.env.VITE_BACKEND_IP || 'localhost';
-  
-  // Force HTTPS for GitHub Pages to avoid Mixed Content issues
-  const protocol = 'https';  // Always use HTTPS for external access
-  const mlApiUrl = `${protocol}://${BACKEND_IP}:8000/api/ml`;
-  
-  // Debug logging
-  console.log('ML API Environment Debug:');
-  console.log('- Current hostname:', window.location.hostname);
-  console.log('- VITE_BACKEND_IP:', import.meta.env.VITE_BACKEND_IP);
-  console.log('- VITE_USE_HTTPS:', import.meta.env.VITE_USE_HTTPS);
-  console.log('- Raw env object:', import.meta.env);
-  console.log('- Resolved BACKEND_IP:', BACKEND_IP);
-  console.log('- Using protocol:', protocol);
-  console.log('- Final ML API URL:', mlApiUrl);
-  
-  return mlApiUrl;
-};
-
-const ML_API_BASE_URL = getMLApiBaseUrl();
+const ML_API_BASE_URL = 'http://localhost:8000/api/ml';
 
 /**
  * ML API Service class following existing API patterns

@@ -47,8 +47,8 @@ bmad_output/
 *.out
 *.err
 
-# GitHub workflows and actions (allow workflows but ignore some files)
-# .github/
+# GitHub workflows and actions
+.github/
 
 # Node.js / Frontend
 node_modules/
