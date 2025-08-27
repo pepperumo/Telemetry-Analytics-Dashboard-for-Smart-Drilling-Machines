@@ -16,7 +16,16 @@ const getApiBaseUrl = () => {
   // For GitHub Pages or external access, you need to provide your machine's IP
   // Replace 'YOUR_MACHINE_IP' with the actual IP address of the computer running the backend
   const BACKEND_IP = import.meta.env.VITE_BACKEND_IP || 'localhost';
-  return `http://${BACKEND_IP}:8000/api/v1`;
+  const apiUrl = `http://${BACKEND_IP}:8000/api/v1`;
+  
+  // Debug logging
+  console.log('Frontend Environment Debug:');
+  console.log('- Current hostname:', window.location.hostname);
+  console.log('- VITE_BACKEND_IP:', import.meta.env.VITE_BACKEND_IP);
+  console.log('- Resolved BACKEND_IP:', BACKEND_IP);
+  console.log('- Final API URL:', apiUrl);
+  
+  return apiUrl;
 };
 
 const API_BASE_URL = getApiBaseUrl();
