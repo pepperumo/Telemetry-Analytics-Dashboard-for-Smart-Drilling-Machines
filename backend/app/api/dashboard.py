@@ -122,6 +122,6 @@ async def health_check(request: Request):
     data_processor = request.app.state.data_processor
     return {
         "status": "healthy",
-        "data_loaded": data_processor.telemetry_df is not None,
+        "data_loaded": data_processor.raw_df is not None,
         "timestamp": datetime.now().isoformat()
     }
