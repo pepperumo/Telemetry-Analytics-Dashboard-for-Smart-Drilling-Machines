@@ -22,7 +22,20 @@ import type {
   MLErrorResponse,
 } from '../types/ml';
 
-const ML_API_BASE_URL = 'http://localhost:8000/api/ml';
+// Determine API base URL based on environment
+const getMLApiBaseUrl = () => {
+  // If running in development (localhost), use localhost
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    return 'http://localhost:8000/api/ml';
+  }
+  
+  // For GitHub Pages or external access, you need to provide your machine's IP
+  // Replace 'YOUR_MACHINE_IP' with the actual IP address of the computer running the backend
+  const BACKEND_IP = import.meta.env.VITE_BACKEND_IP || 'localhost';
+  return `http://${BACKEND_IP}:8000/api/ml`;
+};
+
+const ML_API_BASE_URL = getMLApiBaseUrl();
 
 /**
  * ML API Service class following existing API patterns

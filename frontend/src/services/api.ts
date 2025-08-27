@@ -6,7 +6,20 @@ import type {
   SessionData,
 } from '../types';
 
-const API_BASE_URL = 'http://localhost:8000/api/v1';
+// Determine API base URL based on environment
+const getApiBaseUrl = () => {
+  // If running in development (localhost), use localhost
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    return 'http://localhost:8000/api/v1';
+  }
+  
+  // For GitHub Pages or external access, you need to provide your machine's IP
+  // Replace 'YOUR_MACHINE_IP' with the actual IP address of the computer running the backend
+  const BACKEND_IP = import.meta.env.VITE_BACKEND_IP || 'localhost';
+  return `http://${BACKEND_IP}:8000/api/v1`;
+};
+
+const API_BASE_URL = getApiBaseUrl();
 
 class ApiService {
   private async fetchJson<T>(url: string): Promise<T> {
