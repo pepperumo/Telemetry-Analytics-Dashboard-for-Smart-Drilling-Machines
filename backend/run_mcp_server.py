@@ -95,6 +95,11 @@ async def main():
 
 def run_server():
     """Non-async wrapper to initialize and run the server."""
+    # Get transport configuration from environment variables
+    TRANSPORT = os.getenv("MCP_TRANSPORT", "http")  # Default to HTTP
+    HOST = os.getenv("MCP_HOST", "localhost")
+    PORT = int(os.getenv("MCP_PORT", "8080"))
+    
     # Run initialization first
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
@@ -106,8 +111,16 @@ def run_server():
         
         # Now run the MCP server (which creates its own loop)
         from app.mcp.server import mcp
-        logger.info("Starting FastMCP server with stdio transport")
-        mcp.run(transport="stdio")
+        
+        if TRANSPORT.lower() == "stdio":
+            logger.info("Starting FastMCP server with stdio transport")
+            mcp.run(transport="stdio")
+        elif TRANSPORT.lower() == "sse":
+            logger.info(f"Starting FastMCP server with SSE transport on {HOST}:{PORT}")
+            mcp.run(transport="sse", host=HOST, port=PORT)
+        else:  # Default to HTTP
+            logger.info(f"Starting FastMCP server with HTTP transport on {HOST}:{PORT}")
+            mcp.run(transport="http", host=HOST, port=PORT)
         
     except Exception as e:
         logger.error(f"Failed to start FastMCP server: {e}")
